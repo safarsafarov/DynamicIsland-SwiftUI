@@ -9,7 +9,11 @@ import SwiftUI
 //import DynamicIsland
 
 struct DynamicIslandView: View {
+    
+    @Binding var expanded: Bool
+    
     var body: some View {
+        
         VStack {
             
             HStack {
@@ -25,6 +29,9 @@ struct DynamicIslandView: View {
                     .padding(10)
             }.frame(maxWidth: .infinity, maxHeight: 60)
                 .contentShape(Rectangle())
+                .onTapGesture {
+                    expanded.toggle()
+                }
                 .background {
                     Color.black
                 }
@@ -40,8 +47,15 @@ struct DynamicIslandView: View {
 
 
 struct ContentView: View {
+    
+    @State private var expanded: Bool = false
+    
     var body: some View {
-        DynamicIslandView()
+        VStack {
+            DynamicIslandView(expanded: $expanded)
+            Spacer()
+        }
+        
     }
 }
 
