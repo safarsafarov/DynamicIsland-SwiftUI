@@ -14,6 +14,7 @@ struct DynamicIslandView: View {
     
     var body: some View {
         
+        
         VStack {
             
             HStack {
