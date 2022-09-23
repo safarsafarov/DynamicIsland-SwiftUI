@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-//import DynamicIsland
 
 struct DynamicIslandView: View {
     
@@ -20,18 +19,31 @@ struct DynamicIslandView: View {
             HStack {
                 Image("desk")
                     .resizable()
-                    .frame(width: 30, height: 30)
+                    .frame(width: expanded ? 80 : 30, height: expanded ? 80 : 30)
                     .clipShape(Circle())
                     .padding(10)
+                
+                if expanded {
+                    VStack(alignment: .leading) {
+                        Text("Desk")
+                            .font(.title)
+                        Text("Under the red hood")
+                            .opacity(0.5)
+                    }.foregroundColor(.white)
+                }
+                
                 
                 Spacer()
                 Image(systemName: "chart.bar.fill")
                     .foregroundColor(.white)
                     .padding(10)
-            }.frame(maxWidth: .infinity, maxHeight: 60)
+            }.frame(maxWidth: .infinity, maxHeight: expanded ? 200 : 60)
                 .contentShape(Rectangle())
                 .onTapGesture {
-                    expanded.toggle()
+                    withAnimation(.spring(response: 0.6, dampingFraction: 0.6, blendDuration: 1.0)) {
+                        expanded.toggle()
+                    }
+                    
                 }
                 .background {
                     Color.black
